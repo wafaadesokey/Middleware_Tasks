@@ -12,7 +12,7 @@ namespace ConsoleApp1
 
         static void Main(string[] args)
         {
-            
+
             //cheackUserStstues();//isadmin isbanned ialoggedin
             //Console.WriteLine("==========================================================================");
 
@@ -42,13 +42,209 @@ namespace ConsoleApp1
             //testDistionary();
             // RemoveSpace();
             // truncateAddReadMore();
-            RunTicTac();
+            // RunTicTac();
+            // TestStack();
+            //CheackBalance();
+
+
+            car mycar = new car();
+            //mycar.model = "BMW";
+            //mycar.color = "RED";
+            //mycar.motorno = "cc45r";
+            //mycar.printpror(mycar);
+            //Console.WriteLine(mycar.motorno);
+            //Console.WriteLine(mycar.color);
+
+
+            //InsertCars();
+
+            //math m = new math();
+            //m.Add(4);
+            //Student s = new Student("Ali",20250140);
+            //s.Grades.Add(90);
+            //s.Grades.Add(88);
+            //s.Grades.Add(87);
+            //s.Grades.Add(66);
+            //s.PrintInfo();
+            //Student s = new Student("ali",2025,30);
+            //s.PrintInfo();
+            //s.SetGrades();
+            //s.SumParam(10, 23, 23, 23, 2);
+            //s.SumParam(10, 101,2);
+
+
+            //ass 3
+            ToDolist todo = new ToDolist();
+            todo.ReadFromUser();
+
+
+            //ass 2
+            MyCookieCollection myCookie = new MyCookieCollection();
+            
+            Console.WriteLine(myCookie["Mai"]);     
+  
+            //ass 1
+            StudentGrades gg = new StudentGrades();
+            Console.WriteLine(gg[1]);     //retuen 80
+
+
             Console.ReadKey();
         }
 
 
+        class Customer
+        {
+            public int customerid;
+            string name;
+        }
 
 
+        class Order
+        {
+            public int orderid;
+            DateTime orderdate;
+        }
+
+        class math
+        {
+            public  int Add(int x)
+            {
+                return x + x;
+            }
+            public int Add(int x,int y)
+            {
+                return 0;
+            }
+            public int Add(int x,int y ,int z)
+            {
+                return 0;
+            }
+            public int Add(int x, int y, int z,int g)
+            {
+                return 0;
+            }
+            public int Add(int x, int y, int z, int g,int k)
+            {
+                return 0;
+            }
+        }
+        class car
+        {
+            public string color;
+            public string model;
+
+            public string motorno;
+
+            public string country;
+
+            public void printpror(car c)
+            {
+                Console.WriteLine(c.model);
+                Console.WriteLine(c.color);
+                Console.WriteLine(c.motorno);
+            }
+
+
+        }
+
+
+        public static void InsertCars()
+        {
+            var List = new List<car>();
+
+            for (int i = 0; i < 2; i++)
+            {
+                car c = new car();
+                Console.WriteLine("Enter car model");
+                c.model = Console.ReadLine();
+                Console.WriteLine("Enter car color");
+                c.color = Console.ReadLine();
+                Console.WriteLine("Enter car country");
+                c.country = Console.ReadLine();
+
+                List.Add(c);
+            }
+
+            foreach (var item in List)
+            {
+                Console.WriteLine("Enter car model.." + item.model);
+                Console.WriteLine("Enter car model.." + item.country);
+                Console.WriteLine("Enter car model.." + item.color);
+
+
+            }
+
+
+        }
+
+
+        public struct AccountInfo
+        {
+            public string HolderName;
+            public int AccountId;
+        }
+
+
+        public static void CheackBalance()
+        {
+            int balance = 5000;
+
+            AccountInfo user = new AccountInfo { HolderName = "Ali", AccountId = 985421 };
+            bool issuccess = WithdroAmount(ref balance, 2000, out string mesg, user);
+
+            Console.WriteLine($"User {user.HolderName} with accountNo {user.AccountId}");
+
+            Console.WriteLine($"{mesg}");
+
+            Console.WriteLine($"current balance= { balance} EGY");
+        }
+
+        public static bool WithdroAmount(ref int currentbalance, int amount, out string message, AccountInfo info)
+        {
+            bool issucess = false;
+            Console.WriteLine($"Processing withdrawal for: {info.AccountId} (ID: {info.AccountId})");
+            if (amount > currentbalance)
+            {
+                message = "Insufficient funds."; issucess = false; return issucess;
+
+            }
+            else
+            {
+                currentbalance -= amount;
+                message = "Withdrawal successful"; issucess = true; return issucess;
+            }
+
+            //message = "unexpacted error"; issucess = false;
+        }
+
+        public static void TestStack()
+        {
+            Stack<int> lista = new Stack<int>();
+            lista.Push(20);
+            lista.Push(30);
+            lista.Push(40);
+            lista.Push(50);
+            Console.WriteLine("top value is" + lista.Peek());//expected 50
+
+            //Console.WriteLine("top value is" + lista.Pop());// after pop 40
+
+            Console.WriteLine("  stack count" + lista.Count);//expected 50
+            Console.WriteLine(" stack  sum" + lista.Sum());//sum 50
+                                                           // lista.Clear();
+            if (lista.Count == 0)
+            {
+                Console.WriteLine("is stack Empty?");
+            }
+
+            foreach (var item in lista)
+            {
+                Console.WriteLine(item);//expected 50
+
+            }
+
+
+
+        }
 
 
         public static void RunTicTac()
@@ -84,8 +280,8 @@ namespace ConsoleApp1
                 {
                     Console.WriteLine("Invalid Location");
                 }
-                iswin=CheackWin(board, currentplayer);
-                if(iswin==true)
+                iswin = CheackWin(board, currentplayer);
+                if (iswin == true)
                 {
                     for (int i = 0; i < 3; i++)
                     {
@@ -112,25 +308,25 @@ namespace ConsoleApp1
                         Console.WriteLine("------------");
                     }
                 }
-                
-                
+
+
             }
-            
-         
+
+
 
         }
 
-        public static bool CheackWin(char[,] board,char player)
+        public static bool CheackWin(char[,] board, char player)
         {
             //cheak rows
-             
+
 
             string wintext = "**Congratulations...you are the winner";
             for (int i = 0; i < 3; i++)
             {
                 if (board[i, 0] == player && board[i, 1] == player && board[i, 2] == player)
                 {
-                    Console.WriteLine($"{player}"+ wintext);
+                    Console.WriteLine($"{player}" + wintext);
                     return true;
                 }
             }
@@ -159,7 +355,7 @@ namespace ConsoleApp1
 
         }
 
-        public static void truncateAddReadMore()
+        public static void TruncateAddReadMore()
         {
             StringBuilder sb = new StringBuilder("");
             //sb.Insert(6, "Beautiful ");  //  6
@@ -218,17 +414,18 @@ namespace ConsoleApp1
             Console.WriteLine(r);
 
         }
-        public static void sumref(ref int x)
-        {
-            x = x + 10;
-            Console.WriteLine(x);
-        }
-        public static void sumout(out int x)
-        {
-            x = 9; x += 10;
-            Console.WriteLine();
-        }
-        public static void removeDuplicate()
+
+        //public static void sumref(ref int x)
+        //{
+        //    x = x + 10;
+        //    Console.WriteLine(x);
+        //}
+        //public static void sumout(out int x)
+        //{
+        //    x = 9; x += 10;
+        //    Console.WriteLine();
+        //}
+        public static void RemoveDuplicate()
         {
             var list2 = new List<int>();
             //int len = list.Count;
@@ -260,13 +457,13 @@ namespace ConsoleApp1
             }
         }
 
-        public static void calcProduct(int num1, int num2, out int sum, out int prod)
+        public static void CalcProduct(int num1, int num2, out int sum, out int prod)
         {
             sum = num1 * num2;
             prod = num1 * num2;
             Console.WriteLine($"production ={prod}");
         }
-        public static void countLast()
+        public static void CountLast()
         {
             string x = "itt";
             int len = x.Length; int index = -1;
@@ -280,7 +477,7 @@ namespace ConsoleApp1
             Console.WriteLine($"index of t={index}");
         }
 
-        public static void countVowels()
+        public static void CountVowels()
         {
             Console.WriteLine("Enter English word");
             string text = Console.ReadLine();
@@ -299,7 +496,7 @@ namespace ConsoleApp1
 
 
         }
-        public static void testDistionary()
+        public static void TestDistionary()
         {
             int[] arr = new int[5] { 1, 2, 3, 4, 5 };
             Console.WriteLine(arr.Count());
